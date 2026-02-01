@@ -1,1 +1,158 @@
 # valentine
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💖</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("bg.jpg") no-repeat center center/cover;
+    font-family: Arial, sans-serif;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+}
+
+.box {
+    background: white;
+    padding: 40px 50px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    z-index: 2;
+    max-width: 90%;
+}
+
+h1 {
+    color: #ff4d6d;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    position: relative;
+    height: 80px;
+}
+
+button {
+    padding: 12px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+#yes {
+    background-color: #ff4d6d;
+    color: white;
+}
+
+#no {
+    background-color: #ddd;
+    position: absolute;
+    left: 140px;
+}
+
+.heart {
+    position: absolute;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    z-index: 1;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="box">
+    <h1>Palak, will you be my Valentine? 💘</h1>
+    <p>
+        I don’t know how to say this perfectly,<br>
+        but my heart feels at home when I think of you 💖
+    </p>
+
+    <div class="buttons">
+        <button id="yes" onclick="yesClicked()">Yes ❤️</button>
+        <button id="no" onmouseover="moveNo()">No 💔</button>
+    </div>
+</div>
+
+<!-- Background Music -->
+<audio id="song" loop>
+    <source src="iloveyou.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function moveNo() {
+    const noBtn = document.getElementById("no");
+    noBtn.style.transform =
+      `translate(${Math.random()*260-130}px, ${Math.random()*120-60}px)`;
+}
+
+function yesClicked() {
+    document.getElementById("song").play();
+
+    document.body.innerHTML = `
+    <div style="
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:url('bg.jpg') no-repeat center/cover;
+        color:white;
+        font-family:Arial;
+        text-align:center;">
+        <div style="background:rgba(0,0,0,0.6); padding:40px; border-radius:20px;">
+            <h1>Palak ❤️</h1>
+            <p style="font-size:22px;">
+                I Love You.<br><br>
+                Not just today,<br>
+                but every day I get to choose you 💖
+            </p>
+        </div>
+    </div>`;
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random()*3+3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
